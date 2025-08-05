@@ -4,9 +4,9 @@ pipeline {
     environment {
         NAME = "spring-app1"
         VERSION = "${env.BUILD_ID}"
-        IMAGE_REPO = "indalarajesh"
+        IMAGE_REPO = "sagar520"
         GIT_REPO_NAME = "DevOps_Masterpiece-Project"
-        GIT_USER_NAME = "INDALARAJESH"
+        GIT_USER_NAME = "MAJJISAGAR"
     }
 
     tools { 
@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage('Checkout git') {
             steps {
-                git branch: 'main', url: 'https://github.com/INDALARAJESH/DevOps_Masterpiece-Project.git'
+                git branch: 'main', url: 'https://github.com/MAJJISAGAR/DevOps_Masterpiece-Project.git'
             }
         }
 
@@ -61,7 +61,7 @@ pipeline {
                         }
                     } else {
                         echo 'Repo does not exist - Cloning the repo'
-                        sh 'git clone -b feature https://github.com/INDALARAJESH/DevOps_Masterpiece-Project.git'
+                        sh 'git clone -b feature https://github.com/MAJJISAGAR/DevOps_Masterpiece-Project.git'
                     }
                 }
             }
@@ -70,7 +70,7 @@ pipeline {
         stage('Update deployment Manifest') {
             steps {
                 dir("DevOps_Masterpiece-Project/yamls") {
-                    sh 'sed -i "s#indalarajesh.*#${IMAGE_REPO}/${NAME}:${VERSION}-${GIT_COMMIT}#g" deployment.yaml'
+                    sh 'sed -i "s#sagar520.*#${IMAGE_REPO}/${NAME}:${VERSION}-${GIT_COMMIT}#g" deployment.yaml'
                     sh 'cat deployment.yaml'
                 }
             }
@@ -80,8 +80,8 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'GITHUB_TOKEN', variable: 'GITHUB_TOKEN')]) {
                     dir("DevOps_Masterpiece-Project/yamls") {
-                        sh "git config --global user.email 'rajeshindala1997@gmail.com'"
-                        sh "git config --global user.name 'INDALARAJESH'"
+                        sh "git config --global user.email 'sagarmajji143@gmail.com'"
+                        sh "git config --global user.name 'MAJJISAGAR'"
                         sh 'git remote set-url origin https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}'
                         sh 'git checkout feature'
                         sh 'git add deployment.yaml'

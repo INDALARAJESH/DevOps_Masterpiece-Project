@@ -5,7 +5,7 @@ metadata:
   labels:
     app: spring-app
 spec:
-  replicas: 5
+  replicas: 3
   selector:
     matchLabels:
       app: spring-app
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: spring-app
-        image: indalarajesh/spring-app1:2-4097f515892d23248a195d0c6e96dbaa7aae3c9
+        image: sagar520/spring-app1:1-088819f74466c65ab6acb16ab991ec2f8d7a39e8
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8081
